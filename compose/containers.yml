@@ -1,102 +1,99 @@
 version: '3'
-#---------------------------------------------------------------------#
-#     Homarr - A simple, yet powerful dashboard for your server.     #
-#---------------------------------------------------------------------#
-services:
-  homarr:
-    container_name: homarr
-    image: ghcr.io/ajnart/homarr:latest
-    restart: unless-stopped
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
-      - /smb/media/docker/config/containers/homarr/configs:/app/data/configs
-    ports:
-      - '7575:7575'
-  filebrowser:
-    container_name: filebrowser
-    image: hurlenko/filebrowser
-    user: "${UID}:${GID}"
-    ports:
-      - 6565:8080
-    volumes:
-      - /smb/:/data
-      - /smb/media/docker/config/containers/filebrowser:/config
-    environment:
-      - FB_BASEURL=/filebrowser
-    restart: unless-stopped
-  audiobookshelf:
-    container_name: audiobookshelf
-    image: ghcr.io/advplyr/audiobookshelf:latest
-    ports:
-      - 13378:80
-    volumes:
-      - /smb/media/books:/audiobooks
-      - /smb/media/docker/config/containers/audiobookshelf/config:/config
-      - /smb/media/docker/config/containers/audiobookshelf/metadata:/metadata
-    restart: unless-stopped
-  duplicati:
-    image: lscr.io/linuxserver/duplicati:latest
-    container_name: duplicati
-    environment:
-      - PUID=$PUID
-      - PGID=$PGID
-      - TZ=$TZ
-    volumes:
-      - /smb/media/docker/config/containers/duplicati:/config
-      - /smb/:/backups
-      - /smb/:/source
-    ports:
-      - 8200:8200
-    restart: unless-stopped
-  watchtower:
-    container_name: watchtower
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    environment:
-      - TZ=$TZ
-      - WATCHTOWER_CLEANUP=true
-      - WATCHTOWER_POLL_INTERVAL=86400
-    image: containrrr/watchtower
-    restart: unless-stopped
-  archisteamfarm:
-    container_name: archisteamfarm
-    volumes:
-      - /smb/media/docker/config/containers/asf/config:/app/config
-      - /smb/media/docker/config/containers/asf/logs:/app/logs
-    ports:
-      - 1242:1242
-    image: justarchi/archisteamfarm
-    restart: unless-stopped
-  grocy:
-    image: lscr.io/linuxserver/grocy:latest
-    container_name: grocy
-    environment:
-      - PUID=$PUID
-      - PGID=$PGID
-      - TZ=$TZ
-    volumes:
-      - /smb/media/docker/config/containers/grocy:/config
-    ports:
-      - 9283:80
-    restart: unless-stopped
-  homepage:
-    image: ghcr.io/gethomepage/homepage:latest
-    container_name: homepage
-    environment:
-      PUID: $PUID
-      PGID: $PGID
-    ports:
-      - 80:3000
-    volumes:
-      - /smb/media/docker/config/containers/homepage:/app/config # Make sure your local config directory exists
-      - /var/run/docker.sock:/var/run/docker.sock:ro # optional, for docker integrations
-    restart: unless-stopped
-  qdirstat:
-    container_name: qdirstat
-    image: jlesage/qdirstat
-    ports:
-      - "5800:5800"
-    volumes:
-      - /smb/media/docker/config/containers/qdirstat:/config
-      - /smb/:/storage
-    restart: unless-stopped
+  services:
+    homarr:
+      container_name: homarr
+      image: ghcr.io/ajnart/homarr:latest
+      restart: unless-stopped
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
+        - /smb/media/docker/config/containers/homarr/configs:/app/data/configs
+      ports:
+        - '7575:7575'
+    filebrowser:
+      container_name: filebrowser
+      image: hurlenko/filebrowser
+      user: "${UID}:${GID}"
+      ports:
+        - 6565:8080
+      volumes:
+        - /smb/:/data
+        - /smb/media/docker/config/containers/filebrowser:/config
+      environment:
+        - FB_BASEURL=/filebrowser
+      restart: unless-stopped
+    audiobookshelf:
+      container_name: audiobookshelf
+      image: ghcr.io/advplyr/audiobookshelf:latest
+      ports:
+        - 13378:80
+      volumes:
+        - /smb/media/books:/audiobooks
+        - /smb/media/docker/config/containers/audiobookshelf/config:/config
+        - /smb/media/docker/config/containers/audiobookshelf/metadata:/metadata
+      restart: unless-stopped
+    duplicati:
+      image: lscr.io/linuxserver/duplicati:latest
+      container_name: duplicati
+      environment:
+        - PUID=$PUID
+        - PGID=$PGID
+        - TZ=$TZ
+      volumes:
+        - /smb/media/docker/config/containers/duplicati:/config
+        - /smb/:/backups
+        - /smb/:/source
+      ports:
+        - 8200:8200
+      restart: unless-stopped
+    watchtower:
+      container_name: watchtower
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+      environment:
+        - TZ=$TZ
+        - WATCHTOWER_CLEANUP=true
+        - WATCHTOWER_POLL_INTERVAL=86400
+      image: containrrr/watchtower
+      restart: unless-stopped
+    archisteamfarm:
+      container_name: archisteamfarm
+      volumes:
+        - /smb/media/docker/config/containers/asf/config:/app/config
+        - /smb/media/docker/config/containers/asf/logs:/app/logs
+      ports:
+        - 1242:1242
+      image: justarchi/archisteamfarm
+      restart: unless-stopped
+    grocy:
+      image: lscr.io/linuxserver/grocy:latest
+      container_name: grocy
+      environment:
+        - PUID=$PUID
+        - PGID=$PGID
+        - TZ=$TZ
+      volumes:
+        - /smb/media/docker/config/containers/grocy:/config
+      ports:
+        - 9283:80
+      restart: unless-stopped
+    homepage:
+      image: ghcr.io/gethomepage/homepage:latest
+      container_name: homepage
+      environment:
+        PUID: $PUID
+        PGID: $PGID
+      ports:
+        - 80:3000
+      volumes:
+        - /smb/media/docker/config/containers/homepage:/app/config # Make sure your local config directory exists
+        - /var/run/docker.sock:/var/run/docker.sock:ro # optional, for docker integrations
+      restart: unless-stopped
+    qdirstat:
+      container_name: qdirstat
+      image: jlesage/qdirstat
+      ports:
+        - "5800:5800"
+      volumes:
+        - /smb/media/docker/config/containers/qdirstat:/config
+        - /smb/:/storage
+      restart: unless-stopped
