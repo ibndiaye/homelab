@@ -7,9 +7,9 @@ services:
       - PGID=$PGID
       - TZ=$TZ
     volumes:
-      - /smb/media/docker/config/arrs/sonarr:/config
-      - /smb/media/series:/series #optional
-      - /smb/media/downloads/torrents:/downloads #optional
+      - $DOCKER_CONFIG/arrs/sonarr:/config
+      - $MEDIA/series:/series #optional
+      - $MEDIA/downloads/torrents:/downloads #optional
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -21,9 +21,9 @@ services:
       - PGID=$PGID
       - TZ=$TZ
     volumes:
-      - /smb/media/docker/config/arrs/radarr:/config
-      - /smb/media/movies:/movies #optional
-      - /smb/media/downloads/torrents:/downloads #optional
+      - $DOCKER_CONFIG/arrs/radarr:/config
+      - $MEDIA/movies:/movies #optional
+      - $MEDIA/downloads/torrents:/downloads #optional
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -35,9 +35,9 @@ services:
       - PGID=$PGID
       - TZ=$TZ
     volumes:
-      - /smb/media/docker/config/arrs/bazarr:/config
-      - /smb/media/movies:/movies #optional
-      - /smb/media/series:/series #optional
+      - $DOCKER_CONFIG/arrs/bazarr:/config
+      - $MEDIA/movies:/movies #optional
+      - $MEDIA/series:/series #optional
     ports:
       - 6767:6767
     restart: unless-stopped
@@ -48,7 +48,7 @@ services:
     ports:
       - "8081:8081"
     volumes:
-      - /smb/media/downloads/metube:/downloads
+      - $MEDIA/downloads/metube:/downloads
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
@@ -57,7 +57,7 @@ services:
       - PGID=$PGID
       - TZ=$TZ
     volumes:
-      - /smb/media/docker/config/arrs/prowlarr:/config
+      - $DOCKER_CONFIG/arrs/prowlarr:/config
     ports:
       - 9696:9696
     restart: unless-stopped      
@@ -82,7 +82,7 @@ services:
        ports:
             - 5055:5055
        volumes:
-            - /smb/media/docker/config/arrs/jellyseer:/app/config
+            - $DOCKER_CONFIG/arrs/jellyseer:/app/config
        restart: unless-stopped
   lidarr:
     image: lscr.io/linuxserver/lidarr:latest
@@ -92,9 +92,9 @@ services:
       - PGID=$PGID
       - TZ=$TZ
     volumes:
-      - /smb/media/docker/config/arrs/lidarr:/config
-      - /smb/media/music:/music #optional
-      - /smb/media/downloads/torrents:/downloads #optional
+      - $DOCKER_CONFIG/arrs/lidarr:/config
+      - $MEDIA/music:/music #optional
+      - $MEDIA/downloads/torrents:/downloads #optional
     ports:
       - 8686:8686
     restart: unless-stopped
@@ -106,9 +106,9 @@ services:
       - PGID=$PGID
       - TZ=$TZ
     volumes:
-      - /smb/media/docker/config/arrs/readarr:/config
-      - /smb/media/books:/books #optional
-      - /smb/media/downloads/torrents:/downloads #optional
+      - $DOCKER_CONFIG/arrs/readarr:/config
+      - $MEDIA/books:/books #optional
+      - $MEDIA/downloads/torrents:/downloads #optional
     ports:
       - 8787:8787
     restart: unless-stopped    
@@ -121,8 +121,8 @@ services:
       - TZ=$TZ
       - WEBUI_PORT=8080
     volumes:
-      - /smb/media/docker/config/arrs/qbitt:/config
-      - /smb/media/downloads/torrents:/downloads
+      - $DOCKER_CONFIG/arrs/qbitt:/config
+      - $MEDIA/downloads/torrents:/downloads
     ports:
       - 8080:8080
       - 6881:6881
