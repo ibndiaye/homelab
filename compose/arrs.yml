@@ -128,3 +128,11 @@ services:
       - 6881:6881
       - 6881:6881/udp
     restart: unless-stopped    
+  recyclarr:
+    image: ghcr.io/recyclarr/recyclarr
+    container_name: recyclarr
+    user: $PUID:$PGID
+    volumes:
+      - $DOCKER_CONFIG/arrs/recyclarr:/config
+    environment:
+      - TZ=$TZ
