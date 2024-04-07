@@ -6,7 +6,7 @@ version: '3'
       restart: unless-stopped
       volumes:
         - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
-        - $DOCKER_CONFIG/containers/homarr/configs:/app/data/configs
+        - /smb/media/docker/config/containers/homarr/configs:/app/data/configs
       ports:
         - '7575:7575'
     filebrowser:
@@ -16,8 +16,8 @@ version: '3'
       ports:
         - 6565:8080
       volumes:
-        - $MOUNT:/data
-        - $DOCKER_CONFIG/containers/filebrowser:/config
+        - /smb:/data
+        - /smb/media/docker/config/containers/filebrowser:/config
       environment:
         - FB_BASEURL=/filebrowser
       restart: unless-stopped
@@ -27,9 +27,9 @@ version: '3'
       ports:
         - 13378:80
       volumes:
-        - $MEDIA/books:/audiobooks
-        - $DOCKER_CONFIG/containers/audiobookshelf/config:/config
-        - $DOCKER_CONFIG/containers/audiobookshelf/metadata:/metadata
+        - /smb/media/books:/audiobooks
+        - /smb/media/docker/config/containers/audiobookshelf/config:/config
+        - /smb/media/docker/config/containers/audiobookshelf/metadata:/metadata
       restart: unless-stopped
     duplicati:
       image: lscr.io/linuxserver/duplicati:latest
@@ -39,9 +39,9 @@ version: '3'
         - PGID=$PGID
         - TZ=$TZ
       volumes:
-        - $DOCKER_CONFIG/containers/duplicati:/config
-        - $MOUNT/:/backups
-        - $MOUNT/:/source
+        - /smb/media/docker/config/containers/duplicati:/config
+        - /smb/:/backups
+        - /smb/:/source
       ports:
         - 8200:8200
       restart: unless-stopped
@@ -58,8 +58,8 @@ version: '3'
     archisteamfarm:
       container_name: archisteamfarm
       volumes:
-        - $DOCKER_CONFIG/containers/asf/config:/app/config
-        - $DOCKER_CONFIG/containers/asf/logs:/app/logs
+        - /smb/media/docker/config/containers/asf/config:/app/config
+        - /smb/media/docker/config/containers/asf/logs:/app/logs
       ports:
         - 1242:1242
       image: justarchi/archisteamfarm
@@ -72,7 +72,7 @@ version: '3'
         - PGID=$PGID
         - TZ=$TZ
       volumes:
-        - $DOCKER_CONFIG/containers/grocy:/config
+        - /smb/media/docker/config/containers/grocy:/config
       ports:
         - 9283:80
       restart: unless-stopped
@@ -85,7 +85,7 @@ version: '3'
       ports:
         - 80:3000
       volumes:
-        - $DOCKER_CONFIG/containers/homepage:/app/config # Make sure your local config directory exists
+        - /smb/media/docker/config/containers/homepage:/app/config # Make sure your local config directory exists
         - /var/run/docker.sock:/var/run/docker.sock:ro # optional, for docker integrations
       restart: unless-stopped
     qdirstat:
@@ -94,6 +94,6 @@ version: '3'
       ports:
         - "5800:5800"
       volumes:
-        - $DOCKER_CONFIG/containers/qdirstat:/config
-        - $MOUNT/:/storage
+        - /smb/media/docker/config/containers/qdirstat:/config
+        - /smb/:/storage
       restart: unless-stopped
