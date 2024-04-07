@@ -1,12 +1,33 @@
 version: '3.8'
 services:
-  nginxpm:
-    image: 'jc21/nginx-proxy-manager:latest'
-    restart: unless-stopped
+  # nginxpm:
+  #   image: 'jc21/nginx-proxy-manager:latest'
+  #   restart: unless-stopped
+  #   ports:
+  #     - '80:80'
+  #     - '81:81'
+  #     - '443:443'
+  #   volumes:
+  #     - /smb/media/docker/config/networking/nginx/data:/data
+  #     - /smb/media/docker/config/networking/nginx/letsencrypt:/etc/letsencrypt
+  traefik:
+    image: traefik
+    container_name: traefik
     ports:
-      - '80:80'
-      - '81:81'
-      - '443:443'
+      - 80:80
+      - 443:443
+      # -- (Optional) Enable Dashboard, don't do in production
+      # - 8080:8080
     volumes:
-      - /smb/media/docker/config/networking/nginx/data:/data
-      - /smb/media/docker/config/networking/nginx/letsencrypt:/etc/letsencrypt
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /smb/media/docker/config/networking/traefik/traefik.yaml:/etc/traefik/traefik.yaml:ro
+      - /smb/media/docker/config/networking/traefik/conf/:/etc/traefik/conf/
+      - /smb/media/docker/config/networking/traefik/certs/:/etc/traefik/certs/
+    # -- (Optional) When using Cloudflare as Cert Resolver
+    # environment:
+    #   - CF_DNS_API_TOKEN=your-cloudflare-api-token
+    # -- (Optional) When using a custom network
+    # networks:
+    #   - your-traefik-network
+    restart: unless-stopped
+
