@@ -136,3 +136,5 @@ services:
       - /smb/media/docker/config/arrs/recyclarr:/config
     environment:
       - TZ=$TZ
+      - PUID=$PUID
+      - PGID=$PGID
