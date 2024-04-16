@@ -86,8 +86,8 @@ services:
     volumes:
       - /smb/media/docker/config/containers/homepage:/app/config # Make sure your local config directory exists
       - /var/run/docker.sock:/var/run/docker.sock:ro # optional, for docker integrations
-      - /smb/files:/files
-      - /smb/media:/media
+      - /smb/files:/smb/files
+      - /smb/media:/smb/media
     restart: unless-stopped
   qdirstat:
     container_name: qdirstat
