@@ -52,6 +52,7 @@ services:
       - TZ=$TZ
       - WATCHTOWER_CLEANUP=true
       - WATCHTOWER_POLL_INTERVAL=86400
+      - WATCHTOWER_HTTP_API_TOKEN=
     image: containrrr/watchtower
     restart: unless-stopped
   archisteamfarm:
@@ -96,5 +97,5 @@ services:
       - "5800:5800"
     volumes:
       - /smb/media/docker/config/containers/qdirstat:/config
-      - /smb/:/storage
+      - /smb/:/smb
     restart: unless-stopped
