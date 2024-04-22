@@ -102,6 +102,9 @@ services:
   free-games-claimer:
     stdin_open: true
     tty: true
+    environment:
+      - EG_EMAIL: $EG_EMAIL
+      - EG_PASSWORD: $EG_PASSWORD
     ports:
         - 6080:6080
     volumes:
