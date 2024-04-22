@@ -107,7 +107,7 @@ services:
       - EG_EMAIL=$EG_EMAIL
       - EG_PASSWORD=$EG_PASSWORD
       - WIDTH=1280
-      - HEIGHT=1280
+      - HEIGHT=720
     ports:
         - 6080:6080
     volumes:
