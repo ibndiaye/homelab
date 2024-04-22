@@ -100,6 +100,7 @@ services:
       - /smb/:/smb
     restart: unless-stopped
   free-games-claimer:
+    container_name: fgc
     stdin_open: true
     tty: true
     environment:
