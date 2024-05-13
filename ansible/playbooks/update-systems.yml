@@ -1,5 +1,5 @@
 ---
-- hosts: [LXC, VM]
+- hosts: [NODE, LXC, VM]
   become: true
   name: Update Systems
   tasks:
