@@ -1,0 +1,28 @@
+---
+- hosts: [LXC, VM]
+  become: true
+  name: Update Systems
+  tasks:
+      #Debian Linux
+    - name: Update Debian(based) Systems
+      apt:
+        update_cache: yes
+        force_apt_get: yes
+        cache_valid_time: 3600
+      when: ansible_os_family == "Debian"
+    - name: Upgrade Debian(based) Systems
+      apt:
+        upgrade: dist
+      when: ansible_os_family == "Debian"
+    - name: Clean Debian(based) Systems
+      apt:
+        autoremove: yes
+        autoclean: yes
+        clean: yes
+      when: ansible_os_family == "Debian"
+
+    #Alpine Linux
+    - name: Upgrade
+      command: /sbin/apk upgrade -U -a
+    - name: Clean cache
+      command: /sbin/apk cache clean
