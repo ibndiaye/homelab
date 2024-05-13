@@ -24,5 +24,7 @@
     #Alpine Linux
     - name: Upgrade
       command: /sbin/apk upgrade -U -a
+      when: ansible_os_family == "Alpine"
     - name: Clean cache
       command: /sbin/apk cache clean
+      when: ansible_os_family == "Alpine"
