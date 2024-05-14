@@ -1,0 +1,28 @@
+---
+- hosts: [LXC, VM]
+  name: Initial Setup Play
+  become: true
+  tasks:
+    - name: Install Pkgs
+      ansible.builtin.package:
+        name:
+          - ranger
+          - htop
+          - git
+          - sudo
+          - vim
+          - openssh-server
+        state: latest
+    - name: Enable root login
+      ansible.builtin.lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^PermitRootLogin'
+        line: "PermitRootLogin yes"
+        state: present
+      notify: Restart ssh
+      handlers:
+      - name: Restart ssh
+        ansible.builtin.service:
+          name: sshd
+          state: restarted
+
