@@ -20,9 +20,9 @@
         line: "PermitRootLogin yes"
         state: present
       notify: Restart ssh
-      handlers:
-      - name: Restart ssh
-        ansible.builtin.service:
-          name: sshd
-          state: restarted
+  handlers:
+  - name: Restart ssh
+    ansible.builtin.service:
+      name: sshd
+      state: restarted
 
