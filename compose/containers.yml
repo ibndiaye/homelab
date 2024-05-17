@@ -1,13 +1,4 @@
 services:
-  homarr:
-    container_name: homarr
-    image: ghcr.io/ajnart/homarr:latest
-    restart: unless-stopped
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
-      - /smb/media/docker/config/containers/homarr/configs:/app/data/configs
-    ports:
-      - '7575:7575'
   filebrowser:
     container_name: filebrowser
     image: hurlenko/filebrowser
@@ -114,3 +105,18 @@ services:
         - /smb/media/docker/config/containers/fgc:/fgc/data
     image: ghcr.io/vogler/free-games-claimer
     restart: unless-stopped
+  navidrome:
+    image: deluan/navidrome:latest
+    user: $PUID:$PGID # should be owner of volumes
+    ports:
+      - "4533:4533"
+    restart: unless-stopped
+    environment:
+      # Optional: put your config options customization here. Examples:
+      ND_SCANSCHEDULE: 1h
+      ND_LOGLEVEL: info  
+      ND_SESSIONTIMEOUT: 24h
+      ND_BASEURL: ""
+    volumes:
+      - "/smb/media/docker/config/containers/navidrome:/data"
+      - "/smb/media/music:/music:ro"
