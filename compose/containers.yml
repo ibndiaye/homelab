@@ -119,5 +119,5 @@ services:
       ND_SESSIONTIMEOUT: 24h
       ND_BASEURL: ""
     volumes:
-      - "/smb/media/docker/config/containers/navidrome:/data"
-      - "/smb/media/music:/music:ro"
+      - /smb/media/docker/config/containers/navidrome:/data
+      - /smb/media/music:/music:ro
