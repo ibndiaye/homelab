@@ -1,7 +1,19 @@
 - hosts: debian
   become: true
+  name: Update debian-based vm,lxc
   tasks:
-    - name: Dist-Upgrade
+    - name: Upgrade
       apt:
         update_cache: yes
-        upgrade: 'dist'
+        upgrade: 'yes'
+    - name: Check that the reboot-required exists
+      stat:
+        path: /var/run/reboot-required
+      register: r
+    - name: Reboot if needed
+      reboot:
+        msg: "Machine will be rebooted"
+      when: r.stat.exists
+    - name: Autoremove
+      apt:
+        autoremove: yes
