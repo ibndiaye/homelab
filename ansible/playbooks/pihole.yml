@@ -1,3 +1,6 @@
 - hosts: 192.168.178.3
   name: Update Pihole (Release + Version)
   become: true
+  tasks:
+    - name: Pihole up
+      command: pihole -up
