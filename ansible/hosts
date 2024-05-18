@@ -3,7 +3,6 @@
 
 [alpine]
 192.168.178.25 # tailscale
-192.168.178.107 # uptime-kuma
 
 [debian] #debian based distros
 192.168.178.24 # jf
