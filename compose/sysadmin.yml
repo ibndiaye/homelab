@@ -75,11 +75,11 @@ services:
         container_name: uptime-kuma
         image: louislam/uptime-kuma:1
   tailscale:
-    container_name: tailscale
-    hostname: syadscale
+    container_name: tailscaled
+    hostname: tailscale
     image: tailscale/tailscale:stable
     volumes:
-      - tailscale:/var/lib # State data will be stored in this directory
+      - ./tailscale:/var/lib # State data will be stored in this directory
       - /dev/net/tun:/dev/net/tun # Required for tailscale to work
     cap_add: # Required for tailscale to work
       - net_admin
@@ -96,6 +96,3 @@ volumes:
   nginxpm:
         external: true
         name: nginxpm
-  tailscale:
-        external: true
-        name: tailscale
