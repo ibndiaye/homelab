@@ -6,8 +6,8 @@ services:
     ports:
       - 6565:8080
     volumes:
-      - /smb:/data
-      - /smb/media/docker/config/containers/filebrowser:/config
+      - /nas:/data
+      - /nas/lab/config/containers/filebrowser:/config
     environment:
       - FB_BASEURL=/filebrowser
     restart: unless-stopped
@@ -17,9 +17,9 @@ services:
     ports:
       - 13378:80
     volumes:
-      - /smb/media/books:/audiobooks
-      - /smb/media/docker/config/containers/audiobookshelf/config:/config
-      - /smb/media/docker/config/containers/audiobookshelf/metadata:/metadata
+      - /nas/media/books:/audiobooks
+      - /nas/lab/config/containers/audiobookshelf/config:/config
+      - /nas/lab/config/containers/audiobookshelf/metadata:/metadata
     restart: unless-stopped
   duplicati:
     image: lscr.io/linuxserver/duplicati:latest
@@ -29,9 +29,9 @@ services:
       - PGID=$PGID
       - TZ=$TZ
     volumes:
-      - /smb/media/docker/config/containers/duplicati:/config
-      - /smb/:/backups
-      - /smb/:/source
+      - /nas/lab/config/containers/duplicati:/config
+      - /nas/:/backups
+      - /nas/:/source
     ports:
       - 8200:8200
     restart: unless-stopped
@@ -49,8 +49,8 @@ services:
   archisteamfarm:
     container_name: archisteamfarm
     volumes:
-      - /smb/media/docker/config/containers/asf/config:/app/config
-      - /smb/media/docker/config/containers/asf/logs:/app/logs
+      - /nas/lab/config/containers/asf/config:/app/config
+      - /nas/lab/config/containers/asf/logs:/app/logs
     ports:
       - 1242:1242
     image: justarchi/archisteamfarm
@@ -63,7 +63,7 @@ services:
       - PGID=$PGID
       - TZ=$TZ
     volumes:
-      - /smb/media/docker/config/containers/grocy:/config
+      - /nas/lab/config/containers/grocy:/config
     ports:
       - 9283:80
     restart: unless-stopped
@@ -76,10 +76,10 @@ services:
     ports:
       - 80:3000
     volumes:
-      - /smb/media/docker/config/containers/homepage:/app/config # Make sure your local config directory exists
+      - /nas/lab/config/containers/homepage:/app/config # Make sure your local config directory exists
       - /var/run/docker.sock:/var/run/docker.sock:ro # optional, for docker integrations
-      - /smb/files:/smb/files
-      - /smb/media:/smb/media
+      - /nas/files:/nas/files
+      - /nas/media:/nas/media
     restart: unless-stopped
   qdirstat:
     container_name: qdirstat
@@ -87,21 +87,6 @@ services:
     ports:
       - "5800:5800"
     volumes:
-      - /smb/media/docker/config/containers/qdirstat:/config
-      - /smb/:/smb
-    restart: unless-stopped
-  free-games-claimer:
-    container_name: fgc
-    stdin_open: true
-    tty: true
-    environment:
-      - EG_EMAIL=$EG_EMAIL
-      - EG_PASSWORD=$EG_PASSWORD
-      - WIDTH=1280
-      - HEIGHT=720
-    ports:
-        - 6080:6080
-    volumes:
-        - /smb/media/docker/config/containers/fgc:/fgc/data
-    image: ghcr.io/vogler/free-games-claimer
+      - /nas/lab/config/containers/qdirstat:/config
+      - /nas/:/nas
     restart: unless-stopped
