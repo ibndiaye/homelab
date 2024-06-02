@@ -78,8 +78,7 @@ services:
     volumes:
       - /nas/lab/config/containers/homepage:/app/config # Make sure your local config directory exists
       - /var/run/docker.sock:/var/run/docker.sock:ro # optional, for docker integrations
-      - /nas/files:/nas/files
-      - /nas/media:/nas/media
+      - /nas:/nas
     restart: unless-stopped
   qdirstat:
     container_name: qdirstat
