@@ -38,7 +38,7 @@ services:
   watchtower:
     container_name: watchtower
     volumes:
-      - /var/run/podman/podman.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock
     environment:
       - TZ=$TZ
       - WATCHTOWER_CLEANUP=true
@@ -77,7 +77,7 @@ services:
       - 3000:3000
     volumes:
       - /nas/lab/config/containers/homepage:/app/config # Make sure your local config directory exists
-      - /var/run/podman/podman.sock:/var/run/docker.sock:ro # optional, for docker integrations
+      - /var/run/docker.sock:/var/run/docker.sock:ro # optional, for docker integrations
       - /nas:/nas
     restart: unless-stopped
   qdirstat:
