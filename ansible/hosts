@@ -1,11 +1,10 @@
 [node]
-192.168.178.12 # ndilab
+192.168.178.10 # elite
 
 [alpine]
-192.168.178.25 # tailscale
 
 [debian] #debian based distros
+192.168.178.15 # tailscale
 192.168.178.24 # jf
-192.168.178.3 # pihole
 192.168.178.172 # omv
 192.168.178.13 # docker
