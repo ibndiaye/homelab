@@ -30,8 +30,7 @@ services:
       - TZ=$TZ
     volumes:
       - /nas/lab/config/containers/duplicati:/config
-      - /nas/:/backups
-      - /nas/:/source
+      - /nas/:/nas/
     ports:
       - 8200:8200
     restart: unless-stopped
