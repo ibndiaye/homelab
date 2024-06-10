@@ -131,13 +131,3 @@ services:
       - 6881:6881
       - 6881:6881/udp
     restart: unless-stopped    
-  recyclarr:
-    image: ghcr.io/recyclarr/recyclarr
-    container_name: recyclarr
-    user: $PUID:$PGID
-    volumes:
-      - /nas/lab/config/arrs/recyclarr:/config
-    environment:
-      - TZ=$TZ
-      - PUID=$PUID
-      - PGID=$PGID
