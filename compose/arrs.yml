@@ -82,8 +82,8 @@ services:
        ports:
             - 5055:5055
        dns:
-            - 1.1.1.1
-            - 1.0.0.1
+            - 8.8.8.8
+            - 8.8.4.4
        volumes:
             - /nas/lab/config/arrs/jellyseer:/app/config
        restart: unless-stopped
