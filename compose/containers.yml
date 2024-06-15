@@ -7,7 +7,7 @@ services:
       - 6565:8080
     volumes:
       - /nas:/data
-      - /nas/lab/config/containers/filebrowser:/config
+      - /config/containers/filebrowser:/config
     environment:
       - FB_BASEURL=/filebrowser
     restart: unless-stopped
@@ -18,8 +18,8 @@ services:
       - 13378:80
     volumes:
       - /nas/media/books:/audiobooks
-      - /nas/lab/config/containers/audiobookshelf/config:/config
-      - /nas/lab/config/containers/audiobookshelf/metadata:/metadata
+      - /config/containers/audiobookshelf/config:/config
+      - /config/containers/audiobookshelf/metadata:/metadata
     restart: unless-stopped
   duplicati:
     image: lscr.io/linuxserver/duplicati:latest
@@ -29,7 +29,7 @@ services:
       - PGID=$PGID
       - TZ=$TZ
     volumes:
-      - /nas/lab/config/containers/duplicati:/config
+      - /config/containers/duplicati:/config
       - /nas/:/nas/
     ports:
       - 8200:8200
@@ -48,8 +48,8 @@ services:
   archisteamfarm:
     container_name: archisteamfarm
     volumes:
-      - /nas/lab/config/containers/asf/config:/app/config
-      - /nas/lab/config/containers/asf/logs:/app/logs
+      - /config/containers/asf/config:/app/config
+      - /config/containers/asf/logs:/app/logs
     ports:
       - 1242:1242
     image: justarchi/archisteamfarm
@@ -62,7 +62,7 @@ services:
       - PGID=$PGID
       - TZ=$TZ
     volumes:
-      - /nas/lab/config/containers/grocy:/config
+      - /config/containers/grocy:/config
     ports:
       - 9283:80
     restart: unless-stopped
@@ -75,7 +75,7 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - /nas/lab/config/containers/homepage:/app/config # Make sure your local config directory exists
+      - /config/containers/homepage:/app/config # Make sure your local config directory exists
       - /var/run/docker.sock:/var/run/docker.sock:ro # optional, for docker integrations
       - /nas:/nas
     restart: unless-stopped
@@ -85,6 +85,6 @@ services:
     ports:
       - "5800:5800"
     volumes:
-      - /nas/lab/config/containers/qdirstat:/config
+      - /config/containers/qdirstat:/config
       - /nas/:/nas
     restart: unless-stopped
