@@ -1,0 +1,17 @@
+# Testing compose file, when testing new docker containers
+
+services:
+  beets:
+    image: lscr.io/linuxserver/beets:latest
+    container_name: beets
+    environment:
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+    volumes:
+      - /config/testing/beets:/config
+      - /nas/media/music:/music
+      - /config/testing/beets/downloads:/downloads
+    ports:
+      - 8337:8337
+    restart: unless-stopped
