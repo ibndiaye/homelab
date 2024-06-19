@@ -16,7 +16,7 @@ services:
     restart: unless-stopped
   tailscale: 
     container_name: tailscale 
-    hostname: tailscale-nas 
+    hostname: dockfin 
     image: tailscale/tailscale:stable 
     volumes: 
       - /config/testing/tailscale:/var/lib # State data will be stored in this directory 
