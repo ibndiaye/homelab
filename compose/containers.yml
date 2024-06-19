@@ -6,7 +6,8 @@ services:
     ports:
       - 6565:8080
     volumes:
-      - /nas:/data
+      - /nas:/nas
+      - /config:/nas/config
       - /nas/lab/config/containers/filebrowser:/config
     environment:
       - FB_BASEURL=/filebrowser
