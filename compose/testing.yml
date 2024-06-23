@@ -47,7 +47,7 @@ services:
       - /config/testing/netbootxyz/config:/config
       - /config/testing/netbootxyz/assets:/assets #optional
     ports:
-      - 3000:3000
+      - 3001:3001
       - 69:69/udp
       - 8080:80 #optional
     restart: unless-stopped
