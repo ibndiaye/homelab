@@ -35,8 +35,8 @@ services:
     image: lscr.io/linuxserver/netbootxyz:latest
     container_name: netbootxyz
     environment:
-      - PUID=$PUID
-      - PGID=$PGID
+      - PUID=0
+      - PGID=0
       - TZ=$TZ
       - MENU_VERSION=1.9.9 #optional
       - PORT_RANGE=30000:30010 #optional
