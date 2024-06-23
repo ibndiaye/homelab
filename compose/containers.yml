@@ -94,9 +94,6 @@ services:
     container_name: iventoy
     restart: unless-stopped
     privileged: true #must be true
-    environment:
-      - PUID=$PUID
-      - PGID=$PGID
     ports:
       - 26000:26000
       - 16000:16000
@@ -109,3 +106,5 @@ services:
       - /config/containers/iventoy/log:/app/log
     environment:
       - AUTO_START_PXE=true # optional, true by default
+      - PUID=$PUID
+      - PGID=$PGID
