@@ -101,7 +101,7 @@ services:
       - 67:67/udp
       - 69:69/udp
     volumes:
-      - /nas/downloads/iso:/app/iso
+      - /nas/media/downloads/iso:/app/iso
       - /config/containers/iventoy/data:/app/data
       - /config/containers/iventoy/log:/app/log
     environment:
