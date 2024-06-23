@@ -49,5 +49,5 @@ services:
     ports:
       - 3001:3001
       - 69:69/udp
-      - 8080:80 #optional
+      - 8081:80 #optional
     restart: unless-stopped
