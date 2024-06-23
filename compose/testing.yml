@@ -14,3 +14,20 @@ services:
     ports:
       - 8337:8337
     restart: unless-stopped
+  iventoy:
+    image: ziggyds/iventoy:latest
+    container_name: iventoy
+    restart: always
+    privileged: true #must be true
+    ports:
+      - 26000:26000
+      - 16000:16000
+      - 10809:10809
+      - 67:67/udp
+      - 69:69/udp
+    volumes:
+      - /config/iventoy/iso:/app/iso
+      - /config/iventoy/data:/app/data
+      - /config/iventoy/log:/app/log
+    environment:
+      - AUTO_START_PXE=true # optional, true by default
