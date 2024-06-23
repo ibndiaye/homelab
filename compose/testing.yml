@@ -26,8 +26,8 @@ services:
       - 67:67/udp
       - 69:69/udp
     volumes:
-      - /config/iventoy/iso:/app/iso
-      - /config/iventoy/data:/app/data
-      - /config/iventoy/log:/app/log
+      - /config/testing/iventoy/iso:/app/iso
+      - /config/testing/iventoy/data:/app/data
+      - /config/testing/iventoy/log:/app/log
     environment:
       - AUTO_START_PXE=true # optional, true by default
