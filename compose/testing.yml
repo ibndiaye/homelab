@@ -31,7 +31,7 @@ services:
       - /config/testing/iventoy/log:/app/log
     environment:
       - AUTO_START_PXE=true # optional, true by default
-    netbootxyz:
+  netbootxyz:
     image: lscr.io/linuxserver/netbootxyz:latest
     container_name: netbootxyz
     environment:
