@@ -51,3 +51,15 @@ services:
       - 69:69/udp
       - 8082:80 #optional
     restart: unless-stopped
+  odoo:
+    image: odoo:17.0
+    depends_on:
+      - odoo-db
+    ports:
+      - "8069:8069"
+  odoo-db:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_USER=odoo
