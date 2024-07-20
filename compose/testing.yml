@@ -14,52 +14,22 @@ services:
     ports:
       - 8337:8337
     restart: unless-stopped
-  iventoy:
-    image: ziggyds/iventoy:latest
-    container_name: iventoy
-    restart: always
-    privileged: true #must be true
-    ports:
-      - 26000:26000
-      - 16000:16000
-      - 10809:10809
-      - 67:67/udp
-      # - 69:69/udp
-    volumes:
-      - /config/testing/iventoy/iso:/app/iso
-      - /config/testing/iventoy/data:/app/data
-      - /config/testing/iventoy/log:/app/log
+  db:
+    image: postgres:10
     environment:
-      - AUTO_START_PXE=true # optional, true by default
-  netbootxyz:
-    image: lscr.io/linuxserver/netbootxyz:latest
-    container_name: netbootxyz
-    environment:
-      - PUID=0
-      - PGID=0
-      - TZ=$TZ
-      - MENU_VERSION=1.9.9 #optional
-      - PORT_RANGE=30000:30010 #optional
-      - SUBFOLDER=/ #optional
-      - NGINX_PORT=80 #optional
-      - WEB_APP_PORT=3000 #optional
-    volumes:
-      - /config/testing/netbootxyz/config:/config
-      - /config/testing/netbootxyz/assets:/assets #optional
-    ports:
-      - 3001:3000
-      - 69:69/udp
-      - 8082:80 #optional
-    restart: unless-stopped
-  odoo:
-    image: odoo:17.0
-    depends_on:
-      - odoo-db
-    ports:
-      - "8069:8069"
-  odoo-db:
-    image: postgres:15
-    environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_PASSWORD=odoo
       - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_DB=postgres
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - /config/testing/odoo/db:/var/lib/postgresql/data
+  odoo:
+    image: odoo:latest
+    links:
+      - db:db
+    depends_on:
+      - "db"
+    ports:
+      - 8069:8069
+    volumes:
+      - /config/testing/odoo/:/etc/odoo
