@@ -49,6 +49,9 @@ services:
       - "8081:8081"
     volumes:
       - /nas/media/downloads/metube:/downloads
+    environment:
+      - OUTPUT_TEMPLATE=%(playlist_autonumber)s - %(title)s.%(ext)s
+      - YTDL_OPTIONS={"updatetime":false}
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
