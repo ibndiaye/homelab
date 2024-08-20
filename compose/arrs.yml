@@ -50,7 +50,7 @@ services:
     volumes:
       - /nas/media/downloads/metube:/downloads
     environment:
-      - OUTPUT_TEMPLATE=%(playlist_autonumber)s - %(title)s.%(ext)s
+      - OUTPUT_TEMPLATE=%(playlist_index)s - %(title)s.%(ext)s
       - YTDL_OPTIONS={"updatetime":false}
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
