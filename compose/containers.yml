@@ -89,3 +89,16 @@ services:
       - /config/containers/qdirstat:/config
       - /nas/:/nas
     restart: unless-stopped
+  beets:
+    image: lscr.io/linuxserver/beets:latest
+    container_name: beets
+    environment:
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+    volumes:
+      - /config/containers/beets:/config
+      - /nas/media/music:/music
+    ports:
+      - 8337:8337
+    restart: unless-stopped
