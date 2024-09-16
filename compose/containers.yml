@@ -110,7 +110,7 @@ services:
       - PGID=$PGID
       - TZ=$TZ
     ports:
-      - "5232:5232/tcp"
+      - 5232:5232
     volumes:
       - "/config/containers/radicale/etc:/radicale/etc"
       - "/config/containers/radicale/var:/radicale/var"
