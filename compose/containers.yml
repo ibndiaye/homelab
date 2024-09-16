@@ -102,32 +102,16 @@ services:
     ports:
       - 8337:8337
     restart: unless-stopped
-  radicale:
-    image: tomsquest/docker-radicale
-    container_name: radicale
-    ports:
-      - 127.0.0.1:5232:5232
-    init: true
-    read_only: true
-    security_opt:
-      - no-new-privileges:true
-    cap_drop:
-      - ALL
-    cap_add:
-      - SETUID
-      - SETGID
-      - CHOWN
-      - KILL
-    deploy:
-      resources:
-        limits:
-          memory: 256M
-          pids: 50
-    healthcheck:
-      test: curl -f http://127.0.0.1:5232 || exit 1
-      interval: 30s
-      retries: 3
-    restart: unless-stopped
+  nextcloud:
+    image: lscr.io/linuxserver/nextcloud:latest
+    container_name: nextcloud
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
     volumes:
-      - /config/containers/radicale:/data
-      - /config/containers/radicale/config:/config
+      - /config/containers/nextcloud/config:/config
+      - /config/containers/nextcloud/data:/data
+    ports:
+      - 443:443
+    restart: unless-stopped
