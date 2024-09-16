@@ -106,6 +106,8 @@ services:
     image: "11notes/radicale:3.1.9"
     container_name: "radicale"
     environment:
+      - PUID=$PUID
+      - PGID=$PGID
       - TZ=$TZ
     ports:
       - "5232:5232/tcp"
