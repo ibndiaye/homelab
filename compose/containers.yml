@@ -102,3 +102,14 @@ services:
     ports:
       - 8337:8337
     restart: unless-stopped
+  radicale:
+    image: "11notes/radicale:3.1.9"
+    container_name: "radicale"
+    environment:
+      - TZ=$TZ
+    ports:
+      - "5232:5232/tcp"
+    volumes:
+      - "/config/containers/radicale/etc:/radicale/etc"
+      - "/config/containers/radicale/var:/radicale/var"
+    restart: unless-stopped
