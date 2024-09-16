@@ -130,3 +130,4 @@ services:
     restart: unless-stopped
     volumes:
       - /config/containers/radicale:/data
+      - /config/containers/radicale/config:/config
