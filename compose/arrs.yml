@@ -89,35 +89,7 @@ services:
             - 8.8.4.4
        volumes:
             - /config/arrs/jellyseer:/app/config
-       restart: unless-stopped
-  lidarr:
-    image: lscr.io/linuxserver/lidarr:latest
-    container_name: lidarr
-    environment:
-      - PUID=$PUID
-      - PGID=$PGID
-      - TZ=$TZ
-    volumes:
-      - /config/arrs/lidarr:/config
-      - /nas/media/music:/music #optional
-      - /nas/media/downloads/torrents:/downloads #optional
-    ports:
-      - 8686:8686
-    restart: unless-stopped
-  readarr:
-    image: lscr.io/linuxserver/readarr:develop
-    container_name: readarr
-    environment:
-      - PUID=$PUID
-      - PGID=$PGID
-      - TZ=$TZ
-    volumes:
-      - /config/arrs/readarr:/config
-      - /nas/media/books:/books #optional
-      - /nas/media/downloads/torrents:/downloads #optional
-    ports:
-      - 8787:8787
-    restart: unless-stopped    
+       restart: unless-stopped 
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
