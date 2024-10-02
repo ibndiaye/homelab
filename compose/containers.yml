@@ -160,29 +160,31 @@ services:
       - /config/containers/freshrss/extensions:/var/www/FreshRSS/extensions
   
   speedtest-tracker:
-        container_name: speedtest-tracker
-        ports:
-            - 8883:80
-            - 8443:443
-        environment:
-            - PUID=1000
-            - PGID=1000
-            - APP_KEY= # How to generate an app key: https://speedtest-tracker.dev/
-            - APP_URL=http://localhost
-            - DB_CONNECTION=sqlite
-        volumes:
-            - /config/containers/speedtest-tracker/config:/config
-            - /config/containers/speedtest-tracker/config/keys:/config/keys
-        image: lscr.io/linuxserver/speedtest-tracker:latest
-        restart: unless-stopped
+    container_name: speedtest-tracker
+    ports:
+        - 8883:80
+        - 8443:443
+    environment:
+        - PUID=1000
+        - PGID=1000
+        - APP_KEY= # How to generate an app key: https://speedtest-tracker.dev/
+        - APP_URL=http://localhost
+        - DB_CONNECTION=sqlite
+    volumes:
+        - /config/containers/speedtest-tracker/config:/config
+        - /config/containers/speedtest-tracker/config/keys:/config/keys
+    image: lscr.io/linuxserver/speedtest-tracker:latest
+    restart: unless-stopped
   gokapi:
-      container_name: gokapi
-      restart: unless-stopped
-      volumes:
-          - gokapi-data:/app/data
-          - gokapi-config:/app/config
-      ports:
-          - 127.0.0.1:53842:53842
-      environment:
-          - TZ=UTC
-      image: f0rc3/gokapi:latest
+    container_name: gokapi
+    restart: unless-stopped
+    volumes:
+        - /config/containers/gokapi/data:/app/data
+        - /config/containers/gokapi/config:/app/config
+    ports:
+        - 127.0.0.1:53842:53842
+    environment:
+        - PUID=$PUID
+        - PGID=$PGID
+        - TZ=$TZ
+    image: f0rc3/gokapi:latest
