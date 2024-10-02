@@ -12,6 +12,7 @@ services:
     environment:
       - FB_BASEURL=/filebrowser
     restart: unless-stopped
+
   audiobookshelf:
     container_name: audiobookshelf
     image: ghcr.io/advplyr/audiobookshelf:latest
@@ -22,6 +23,7 @@ services:
       - /config/containers/audiobookshelf/config:/config
       - /config/containers/audiobookshelf/metadata:/metadata
     restart: unless-stopped
+
   duplicati:
     image: lscr.io/linuxserver/duplicati:latest
     container_name: duplicati
@@ -35,6 +37,7 @@ services:
     ports:
       - 8200:8200
     restart: unless-stopped
+
   watchtower:
     container_name: watchtower
     volumes:
@@ -46,6 +49,7 @@ services:
       # - WATCHTOWER_HTTP_API_TOKEN=watchtowertkn
     image: containrrr/watchtower
     restart: unless-stopped
+
   archisteamfarm:
     container_name: archisteamfarm
     volumes:
@@ -55,6 +59,7 @@ services:
       - 1242:1242
     image: justarchi/archisteamfarm
     restart: unless-stopped
+
   grocy:
     image: lscr.io/linuxserver/grocy:latest
     container_name: grocy
@@ -67,6 +72,7 @@ services:
     ports:
       - 9283:80
     restart: unless-stopped
+
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
@@ -80,6 +86,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro # optional, for docker integrations
       - /nas:/nas
     restart: unless-stopped
+
   qdirstat:
     container_name: qdirstat
     image: jlesage/qdirstat
@@ -89,6 +96,7 @@ services:
       - /config/containers/qdirstat:/config
       - /nas/:/nas
     restart: unless-stopped
+
   beets:
     image: lscr.io/linuxserver/beets:latest
     container_name: beets
@@ -102,6 +110,7 @@ services:
     ports:
       - 8337:8337
     restart: unless-stopped
+
   nextcloud:
     image: lscr.io/linuxserver/nextcloud:latest
     container_name: nextcloud
@@ -115,16 +124,15 @@ services:
     ports:
       - 9191:443
     restart: unless-stopped
+
   stirling-pdf:
     image: frooodle/s-pdf:latest
     container_name: stirling-pdf
     ports:
       - '6161:8080'
     volumes:
-      - /config/containers/stirling-pdf/tessdata:/usr/share/tessdata #Required for extra OCR languages
+      - /config/containers/stirling-pdf/tessdata:/usr/share/tessdata # Required for extra OCR languages
       - /config/containers/stirling-pdf/config:/configs
-#      - ./customFiles:/customFiles/
-#      - ./logs:/logs/
     environment:
       - PUID=$PUID
       - PGID=$PGID
@@ -132,6 +140,7 @@ services:
       - INSTALL_BOOK_AND_ADVANCED_HTML_OPS=false
       - LANGS=en_GB
     restart: unless-stopped
+
   freshrss:
     image: freshrss/freshrss:edge
     # Optional build section if you want to build the image locally:
@@ -165,21 +174,13 @@ services:
       LISTEN: 0.0.0.0:80
       # Optional parameter, remove for automatic settings, set to 0 to disable,
       # or (if you use a proxy) to a space-separated list of trusted IP ranges
-      # compatible with https://httpd.apache.org/docs/current/mod/mod_remoteip.html#remoteipinternalproxy
-      # This impacts which IP address is logged (X-Forwarded-For or REMOTE_ADDR).
-      # This also impacts external authentication methods;
-      # see https://freshrss.github.io/FreshRSS/en/admins/09_AccessControl.html
       TRUSTED_PROXY: 172.16.0.1/12 192.168.0.1/16
       # Optional parameter, set to 1 to enable OpenID Connect (only available in our Debian image)
-      # Requires more environment variables. See https://freshrss.github.io/FreshRSS/en/admins/16_OpenID-Connect.html
       OIDC_ENABLED: 0
       # Optional auto-install parameters (the Web interface install is recommended instead):
-      # ⚠️ Parameters below are only used at the very first run (so far).
-      # So if changes are made (or in .env file), first delete the service and volumes.
-      # ℹ️ All the --db-* parameters can be omitted if using built-in SQLite database.
       FRESHRSS_INSTALL: |-
         --api-enabled
-       --base-url ${BASE_URL}
+        --base-url ${BASE_URL}
         --db-base ${DB_BASE}
         --db-host ${DB_HOST}
         --db-password ${DB_PASSWORD}
