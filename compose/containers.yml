@@ -167,7 +167,7 @@ services:
     environment:
         - PUID=1000
         - PGID=1000
-        - APP_KEY= # How to generate an app key: https://speedtest-tracker.dev/
+        - APP_KEY=$SPEEDTEST_API # How to generate an app key: https://speedtest-tracker.dev/
         - APP_URL=http://localhost
         - DB_CONNECTION=sqlite
     volumes:
@@ -182,7 +182,7 @@ services:
         - /config/containers/gokapi/data:/app/data
         - /config/containers/gokapi/config:/app/config
     ports:
-        - 127.0.0.1:53842:53842
+        - 53842:53842
     environment:
         - PUID=$PUID
         - PGID=$PGID
