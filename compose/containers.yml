@@ -117,6 +117,7 @@ services:
     restart: unless-stopped
   stirling-pdf:
     image: frooodle/s-pdf:latest
+    container_name: nextcloud
     ports:
       - '6161:8080'
     volumes:
@@ -128,3 +129,4 @@ services:
       - DOCKER_ENABLE_SECURITY=false
       - INSTALL_BOOK_AND_ADVANCED_HTML_OPS=false
       - LANGS=en_GB
+    restart: unless-stopped
