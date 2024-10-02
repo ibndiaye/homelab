@@ -115,3 +115,16 @@ services:
     ports:
       - 9191:443
     restart: unless-stopped
+  stirling-pdf:
+    image: frooodle/s-pdf:latest
+    ports:
+      - '6161:8080'
+    volumes:
+      - /config/containers/stirling-pdf/tessdata:/usr/share/tessdata #Required for extra OCR languages
+      - /config/containers/stirling-pdf/config:/configs
+#      - ./customFiles:/customFiles/
+#      - ./logs:/logs/
+    environment:
+      - DOCKER_ENABLE_SECURITY=false
+      - INSTALL_BOOK_AND_ADVANCED_HTML_OPS=false
+      - LANGS=en_GB
