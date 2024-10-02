@@ -153,10 +153,10 @@ services:
       # If you want to open a port 8080 on the local machine:
       - "8089:80"
     environment:
-      PUID: $PUID
-      PGID: $PGID
+      PUID: ${PUID}
+      PGID: ${PGID}
       # A timezone http://php.net/timezones (default is UTC)
-      TZ: $TZ
+      TZ: ${TZ}
       # Cron job to refresh feeds at specified minutes
       CRON_MIN: '2,32'
       # 'development' for additional logs; default is 'production'
