@@ -149,7 +149,7 @@ services:
       options:
         max-size: 10m
     ports:
-      - 8080:80
+      - 8089:80
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
