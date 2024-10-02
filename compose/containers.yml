@@ -172,6 +172,7 @@ services:
             - DB_CONNECTION=sqlite
         volumes:
             - /config/containers/speedtest-tracker/config:/config
+            - /config/containers/speedtest-tracker/config/keys:/config/keys
         image: lscr.io/linuxserver/speedtest-tracker:latest
         restart: unless-stopped
   gokapi:
