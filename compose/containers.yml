@@ -174,3 +174,14 @@ services:
             - /config/containers/speedtest-tracker/config:/config
         image: lscr.io/linuxserver/speedtest-tracker:latest
         restart: unless-stopped
+  gokapi:
+      container_name: gokapi
+      restart: unless-stopped
+      volumes:
+          - gokapi-data:/app/data
+          - gokapi-config:/app/config
+      ports:
+          - 127.0.0.1:53842:53842
+      environment:
+          - TZ=UTC
+      image: f0rc3/gokapi:latest
