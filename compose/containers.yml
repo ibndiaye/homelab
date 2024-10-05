@@ -19,7 +19,7 @@ services:
     ports:
       - 13378:80
     volumes:
-      - /nas/media/books:/audiobooks
+      - /nas/media/books:/books
       - /config/containers/audiobookshelf/config:/config
       - /config/containers/audiobookshelf/metadata:/metadata
     restart: unless-stopped
